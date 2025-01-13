@@ -12,7 +12,9 @@ class Product:
 
 
 if __name__ == "__main__":
-    product = Product("Apple iPhone 16 Pro Max", "Флагман с передовой камерой", 150000.00, 15)
+    product = Product(
+        "Apple iPhone 16 Pro Max", "Флагман с передовой камерой", 150000.00, 15
+    )
 
     print(product.name)
     print(product.description)

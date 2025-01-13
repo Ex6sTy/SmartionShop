@@ -1,34 +1,60 @@
-from product import Product
+import json
+import os
+from src.product import Product
+
 
 class Category:
-    name = str  # Название категории
-    description = str  # Описание категории
-    products = []  # Продукты категории
+    name = str
+    description = str
+    products = []
     category_count = 0
     product_count = 0
 
     def __init__(self, name, description, products):
-            self.name = name  # Название категории
-            self.description = description  # Описание категории
-            self.products = products if isinstance(products, list) else []  # Список продуктов
-            Category.category_count += 1 if description else 0
-            Category.product_count += sum(product.quantity for product in self.products)
+        self.name = name
+        self.description = description
+        self.products = products if isinstance(products, list) else []
+        Category.category_count += 1 if description else 0
+        Category.product_count += sum(product.quantity for product in self.products)
 
     def __str__(self):
-            product_list = ", ".join([product.name for product in self.products])
-            return f"Category: {self.name}, Description: {self.description}, Products: [{product_list}]"
+        product_list = ", ".join([product.name for product in self.products])
+        return f"Category: {self.name}, Description: {self.description}, Products: [{product_list}]"
+
+    @staticmethod
+    def load_from_json(file_path):
+        # Проверяем существование файла
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"Файл {file_path} не найден!")
+
+        # Загружаем JSON
+        with open(file_path, "r", encoding="utf-8") as file:
+            data = json.load(file)
+
+        categories = []
+        for category_data in data["categories"]:
+            products = [
+                Product(
+                    product["name"],
+                    product["description"],
+                    product["price"],
+                    product["quantity"],
+                )
+                for product in category_data["products"]
+            ]
+            category = Category(category_data["name"], category_data["name"], products)
+            categories.append(category)
+
+        return categories
+
 
 if __name__ == "__main__":
-    # Создаём продукты
-    product1 = Product("Apple iPhone 16 Pro Max", "Флагман с передовой камерой", 150000.00, 15)
-    product2 = Product("Dell XPS 15", "Мощный ноутбук для работы и игр", 120000.00, 7)
-    product3 = Product("Apple Watch Ultra 2", "Умные часы для экстремальных тренировок", 95000.00, 25)
-    product4 = Product("Samsung Neo QLED 8K", "Высокое качество изображения", 450000.00, 5)
-    product5 = Product("BambuLab P1S", "Скорость печати и автоматизация", 100000.00, 9)
+    # Используем путь относительно текущего файла
+    file_path = os.path.join(os.path.dirname(__file__), "../products.json")
+    categories = Category.load_from_json(file_path)
 
-    # Создаём категорию
-    category = Category("Смартфоны", "Устройства для связи", [product1, product2, product3])
+    for category in categories:
+        print(category)
 
-    print(category)
     print(f"Total Categories: {Category.category_count}")
     print(f"Total Products: {Category.product_count}")
