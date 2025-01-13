@@ -1,34 +1,63 @@
+import json
 from src.product import Product
 
 
 class Category:
-    name = str # Название категории
-    description = str # Описание категории
-    products = str # Продукты категории
     category_count = 0
     product_count = 0
 
     def __init__(self, name, description, products):
+        """
+        Инициализация категории.
+
+        :param name: Название категории
+        :param description: Описание категории
+        :param products: Список объектов Product
+        """
         self.name = name
         self.description = description
-        self.products = products
-        Category.category_count += 1 if description else 0
-        Category.product_count += len(products) if products else 0
+        self.products = products if isinstance(products, list) else []
 
-if __name__ == "__main__":
-    product1 = Product("Смартфоны", "Устройства для связи", 171900.00,13)
-    product2 = Product("Компьютеры и ноутбуки", "Для работы и игр", 120900.00,7)
-    product3 = Product("Гаджеты", "Умные устройства", 169500.00,25)
-    product4 = Product("Телевизоры", "Устройства для отображения видео в высоком качестве")
-    product5 = Product("Инновационная техника", "Для 3D-печати", 83900.00,9)
+        # Увеличиваем глобальный счётчик категорий
+        Category.category_count += 1
 
-    category = Category("Смартфоны", "Apple", [product1, product2, product3, product4])
+        # Увеличиваем глобальный счётчик продуктов
+        Category.product_count += len(self.products)
 
-    print(category.name)
-    print(category.description)
-    print(category.products)
+    @staticmethod
+    def load_from_json(file_path):
+        """
+        Читает JSON-файл и преобразует данные в объекты Category и Product.
 
-    print(Category.category_count)
-    print(Category.product_count)
+        :param file_path: Путь к JSON-файлу
+        :return: Список объектов Category
+        """
+        # Сбрасываем счётчики перед загрузкой
+        Category.category_count = 0
+        Category.product_count = 0
 
+        with open(file_path, "r", encoding="utf-8") as file:
+            data = json.load(file)
 
+        categories = []
+        for category_data in data["categories"]:
+            # Преобразуем продукты
+            products = [
+                Product(
+                    product["name"],
+                    product.get("description", "Описание отсутствует"),
+                    product["price"],
+                    product["quantity"],
+                )
+                for product in category_data["products"]
+            ]
+
+            # Создаём объект категории
+            category = Category(
+                category_data["name"],
+                category_data.get("description", "Описание категории отсутствует"),
+                products,
+            )
+            categories.append(category)
+
+        return categories
