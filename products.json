@@ -2,6 +2,7 @@
   "categories": [
     {
       "name": "Смартфоны",
+      "description": "Устройства для связи",
       "products": [
         {
           "name": "Apple iPhone 16 Pro Max",
@@ -25,6 +26,7 @@
     },
     {
       "name": "Компьютеры и ноутбуки",
+      "description": "Мощные устройства для работы и игр",
       "products": [
         {
           "name": "Apple MacBook Pro 16",
@@ -48,6 +50,7 @@
     },
     {
       "name": "Гаджеты",
+      "description": "Умные устройства для повседневной жизни",
       "products": [
         {
           "name": "Apple Watch Ultra 2",
@@ -71,6 +74,7 @@
     },
     {
       "name": "Телевизоры",
+      "description": "Современные устройства для отображения видео",
       "products": [
         {
           "name": "Samsung Neo QLED 8K",
@@ -94,6 +98,7 @@
     },
     {
       "name": "Инновационная техника",
+      "description": "3D-принтеры для дома и работы",
       "products": [
         {
           "name": "BambuLab P1S",

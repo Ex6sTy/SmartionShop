@@ -1,43 +1,71 @@
 import pytest
 import json
+from src.product import Product
+from src.category import Category
 
 
 @pytest.fixture
 def temp_json_file(tmp_path):
-    """Создаёт временный JSON-файл с тестовыми данными."""
+    """
+    Создаёт временный JSON-файл с тестовыми данными для категорий и продуктов.
+
+    :param tmp_path: Временная директория для файла
+    :return: Путь к созданному JSON-файлу
+    """
     data = {
         "categories": [
             {
                 "name": "Смартфоны",
+                "description": "Устройства для связи",
                 "products": [
-                    {
-                        "name": "Apple iPhone 16 Pro Max",
-                        "description": "Флагман с передовой камерой",
-                        "price": 150000.00,
-                        "quantity": 15,
-                    },
-                    {
-                        "name": "Samsung Galaxy S23 Ultra",
-                        "description": "Высокая производительность и мощная камера",
-                        "price": 110000.00,
-                        "quantity": 20,
-                    },
-                ],
-            },
-            {
-                "name": "Гаджеты",
-                "products": [
-                    {
-                        "name": "Apple Watch Ultra 2",
-                        "description": "Для экстремальных тренировок",
-                        "price": 95000.00,
-                        "quantity": 18,
-                    }
+                    {"name": "Samsung Galaxy S23 Ultra", "description": "256GB, Серый цвет", "price": 180000.0, "quantity": 5},
+                    {"name": "Iphone 15", "description": "512GB, Gray space", "price": 210000.0, "quantity": 8},
+                    {"name": "Xiaomi Redmi Note 11", "description": "1024GB, Синий", "price": 31000.0, "quantity": 14},
                 ],
             },
         ]
     }
-    file = tmp_path / "products.json"
-    with open(file, "w", encoding="utf-8") as f:
-        json.dump(data, f)
-    return file
+
+    file_path = tmp_path / "products.json"
+    with open(file_path, "w", encoding="utf-8") as file:
+        json.dump(data, file)
+
+    return file_path
+
+
+@pytest.fixture
+def sample_products():
+    """
+    Возвращает список тестовых объектов Product.
+
+    :return: Список продуктов
+    """
+    return [
+        Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет", 180000.0, 5),
+        Product("Iphone 15", "512GB, Gray space", 210000.0, 8),
+        Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14),
+    ]
+
+
+@pytest.fixture
+def sample_category(sample_products):
+    """
+    Возвращает тестовый объект Category с продуктами.
+
+    :param sample_products: Фикстура со списком продуктов
+    :return: Объект Category
+    """
+    return Category(
+        "Смартфоны",
+        "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
+        sample_products,
+    )
+
+
+@pytest.fixture(autouse=True)
+def reset_category_counters():
+    """
+    Сбрасывает глобальные счётчики перед каждым тестом.
+    """
+    Category.category_count = 0
+    Category.product_count = 0
