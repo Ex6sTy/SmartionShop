@@ -1,5 +1,6 @@
 import pytest
 from src.category import Category
+from src.product import Product
 
 
 def test_load_from_json(temp_json_file):
@@ -61,3 +62,9 @@ def test_category_without_products():
     assert empty_category.name == "Пустая категория"
     assert empty_category.description == "Нет продуктов"
     assert len(empty_category.products) == 0
+
+
+def test_category_add_product(sample_category, product_data):
+    new_product = Product(**product_data)
+    sample_category.add_product(new_product)
+    assert "Xiaomi Redmi Note 11" in sample_category.products

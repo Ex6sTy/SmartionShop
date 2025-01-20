@@ -6,21 +6,31 @@ from src.category import Category
 
 @pytest.fixture
 def temp_json_file(tmp_path):
-    """
-    Создаёт временный JSON-файл с тестовыми данными для категорий и продуктов.
-
-    :param tmp_path: Временная директория для файла
-    :return: Путь к созданному JSON-файлу
-    """
+    """Создаёт временный JSON-файл с тестовыми данными."""
     data = {
         "categories": [
             {
                 "name": "Смартфоны",
                 "description": "Устройства для связи",
                 "products": [
-                    {"name": "Samsung Galaxy S23 Ultra", "description": "256GB, Серый цвет", "price": 180000.0, "quantity": 5},
-                    {"name": "Iphone 15", "description": "512GB, Gray space", "price": 210000.0, "quantity": 8},
-                    {"name": "Xiaomi Redmi Note 11", "description": "1024GB, Синий", "price": 31000.0, "quantity": 14},
+                    {
+                        "name": "Samsung Galaxy S23 Ultra",
+                        "description": "256GB, Серый цвет, 200MP камера",
+                        "price": 180000.0,
+                        "quantity": 5,
+                    },
+                    {
+                        "name": "Iphone 15",
+                        "description": "512GB, Gray space",
+                        "price": 210000.0,
+                        "quantity": 8,
+                    },
+                    {
+                        "name": "Xiaomi Redmi Note 11",
+                        "description": "1024GB, Синий",
+                        "price": 31000.0,
+                        "quantity": 14,
+                    },
                 ],
             },
         ]
@@ -31,6 +41,8 @@ def temp_json_file(tmp_path):
         json.dump(data, file)
 
     return file_path
+
+
 
 
 @pytest.fixture
@@ -69,3 +81,8 @@ def reset_category_counters():
     """
     Category.category_count = 0
     Category.product_count = 0
+
+
+@pytest.fixture
+def product_data():
+    return {"name": "Xiaomi Redmi Note 11", "description": "1024GB, Синий", "price": 31000.0, "quantity": 14}
