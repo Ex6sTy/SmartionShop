@@ -68,3 +68,11 @@ def test_category_add_product(sample_category, product_data):
     new_product = Product(**product_data)
     sample_category.add_product(new_product)
     assert "Xiaomi Redmi Note 11" in sample_category.products
+
+def test_category_str_representation(sample_category):
+    expected_str = "Смартфоны, количество продуктов: 27 шт."  # 5 + 8 + 14 = 27
+    assert str(sample_category) == expected_str
+
+def test_category_iteration(sample_category):
+    products = [p.name for p in sample_category]
+    assert products == ["Samsung Galaxy S23 Ultra", "Iphone 15", "Xiaomi Redmi Note 11"]

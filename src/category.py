@@ -1,6 +1,7 @@
 import json
 import os
 from src.product import Product
+from src.category_iterator import CategoryIterator
 
 
 class Category:
@@ -24,6 +25,19 @@ class Category:
         self.description = description
         self.__products = [] # Приватный список продуктов
         Category.category_count += 1
+
+    def __str__(self):
+        """
+        Строковое представление категории.
+        """
+        total_quantity = sum(product.quantity for product in self.__products)
+        return f"{self.name}, количество продуктов: {total_quantity} шт."
+
+    def __iter__(self):
+        """
+        Возвращает итератор для продуктов категории.
+        """
+        return CategoryIterator(self)
 
     @staticmethod
     def load_from_json(file_path):

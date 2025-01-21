@@ -88,3 +88,16 @@ def test_product_count(temp_json_file):
 
     # Проверяем общее количество продуктов
     assert Category.product_count == 3
+
+def test_product_str_representation():
+    product = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет", 180000.0, 5)
+    expected_str = "Samsung Galaxy S23 Ultra, 180000.0 руб. Остаток: 5 шт."
+    assert str(product) == expected_str
+
+def test_product_addition():
+    product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет", 180000.0, 5)
+    product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
+
+    # 180000 * 5 + 210000 * 8 = 3,780,000
+    expected_sum = 180000 * 5 + 210000 * 8
+    assert product1 + product2 == expected_sum

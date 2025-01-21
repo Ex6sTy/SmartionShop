@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f50b7e2a-a8ca-4368-adc0-646e3405cd82" name="Changes" comment="Добавление README файла">
+    <list default="true" id="f50b7e2a-a8ca-4368-adc0-646e3405cd82" name="Changes" comment="Реализовано расширение функциональности для классов Category и Product&#10;&#10;- В классе `Category`:&#10;  - Приватный режим доступа для атрибута `products`.&#10;  - Реализован метод `add_product()` для добавления продуктов в категорию.&#10;  - Добавлен геттер `products`, возвращающий строку со списком продуктов в формате: &quot;Название продукта, X руб. Остаток: X шт.\n&quot;.&#10;&#10;- В классе `Product`:&#10;  - Приватный режим доступа для атрибута `price`.&#10;  - Реализованы геттер и сеттер для `price`:&#10;    - Сеттер проверяет, что цена не может быть отрицательной или нулевой.&#10;    - При снижении цены требуется подтверждение пользователя.&#10;  - Реализован класс-метод `new_product()`, создающий объект на основе словаря:&#10;    - Обновляет количество, если продукт с таким именем уже существует.&#10;    - Выбирает максимальную цену в случае конфликта.&#10;&#10;- Написаны тесты для новой функциональности:&#10;  - Проверка геттера и сеттера `price` в классе `Product`.&#10;  - Тесты для метода `add_product()` и геттера `products` в классе `Category`.&#10;  - Тесты для `new_product()`:&#10;    - Создание нового продукта.&#10;    - Обновление существующего продукта.&#10;  - Добавлен отчёт о покрытии тестами.&#10;&#10;- Обновлён `README.md`:&#10;  - Добавлено описание новой функциональности.">
+      <change afterPath="$PROJECT_DIR$/src/category_iterator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_category_iterator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/category.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/category.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/product.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/product.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_category.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_category.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_product.py" afterDir="false" />
     </list>
@@ -27,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="develop" />
+        <entry key="$PROJECT_DIR$" value="Feature" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -62,7 +63,7 @@
     "Python.test_main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Feature"
+    "git-widget-placeholder": "#3 on Feature"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -135,7 +136,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736862698613</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Реализовано расширение функциональности для классов Category и Product&#10;&#10;- В классе `Category`:&#10;  - Приватный режим доступа для атрибута `products`.&#10;  - Реализован метод `add_product()` для добавления продуктов в категорию.&#10;  - Добавлен геттер `products`, возвращающий строку со списком продуктов в формате: &quot;Название продукта, X руб. Остаток: X шт.\n&quot;.&#10;&#10;- В классе `Product`:&#10;  - Приватный режим доступа для атрибута `price`.&#10;  - Реализованы геттер и сеттер для `price`:&#10;    - Сеттер проверяет, что цена не может быть отрицательной или нулевой.&#10;    - При снижении цены требуется подтверждение пользователя.&#10;  - Реализован класс-метод `new_product()`, создающий объект на основе словаря:&#10;    - Обновляет количество, если продукт с таким именем уже существует.&#10;    - Выбирает максимальную цену в случае конфликта.&#10;&#10;- Написаны тесты для новой функциональности:&#10;  - Проверка геттера и сеттера `price` в классе `Product`.&#10;  - Тесты для метода `add_product()` и геттера `products` в классе `Category`.&#10;  - Тесты для `new_product()`:&#10;    - Создание нового продукта.&#10;    - Обновление существующего продукта.&#10;  - Добавлен отчёт о покрытии тестами.&#10;&#10;- Обновлён `README.md`:&#10;  - Добавлено описание новой функциональности.">
+      <option name="closed" value="true" />
+      <created>1737384417657</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1737384417657</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -153,6 +162,7 @@
     <MESSAGE value="Инициализация проекта&#10;Созданы классы Product и Category. Определены атрибуты классов." />
     <MESSAGE value="Исправление ошибок" />
     <MESSAGE value="Добавление README файла" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавление README файла" />
+    <MESSAGE value="Реализовано расширение функциональности для классов Category и Product&#10;&#10;- В классе `Category`:&#10;  - Приватный режим доступа для атрибута `products`.&#10;  - Реализован метод `add_product()` для добавления продуктов в категорию.&#10;  - Добавлен геттер `products`, возвращающий строку со списком продуктов в формате: &quot;Название продукта, X руб. Остаток: X шт.\n&quot;.&#10;&#10;- В классе `Product`:&#10;  - Приватный режим доступа для атрибута `price`.&#10;  - Реализованы геттер и сеттер для `price`:&#10;    - Сеттер проверяет, что цена не может быть отрицательной или нулевой.&#10;    - При снижении цены требуется подтверждение пользователя.&#10;  - Реализован класс-метод `new_product()`, создающий объект на основе словаря:&#10;    - Обновляет количество, если продукт с таким именем уже существует.&#10;    - Выбирает максимальную цену в случае конфликта.&#10;&#10;- Написаны тесты для новой функциональности:&#10;  - Проверка геттера и сеттера `price` в классе `Product`.&#10;  - Тесты для метода `add_product()` и геттера `products` в классе `Category`.&#10;  - Тесты для `new_product()`:&#10;    - Создание нового продукта.&#10;    - Обновление существующего продукта.&#10;  - Добавлен отчёт о покрытии тестами.&#10;&#10;- Обновлён `README.md`:&#10;  - Добавлено описание новой функциональности." />
+    <option name="LAST_COMMIT_MESSAGE" value="Реализовано расширение функциональности для классов Category и Product&#10;&#10;- В классе `Category`:&#10;  - Приватный режим доступа для атрибута `products`.&#10;  - Реализован метод `add_product()` для добавления продуктов в категорию.&#10;  - Добавлен геттер `products`, возвращающий строку со списком продуктов в формате: &quot;Название продукта, X руб. Остаток: X шт.\n&quot;.&#10;&#10;- В классе `Product`:&#10;  - Приватный режим доступа для атрибута `price`.&#10;  - Реализованы геттер и сеттер для `price`:&#10;    - Сеттер проверяет, что цена не может быть отрицательной или нулевой.&#10;    - При снижении цены требуется подтверждение пользователя.&#10;  - Реализован класс-метод `new_product()`, создающий объект на основе словаря:&#10;    - Обновляет количество, если продукт с таким именем уже существует.&#10;    - Выбирает максимальную цену в случае конфликта.&#10;&#10;- Написаны тесты для новой функциональности:&#10;  - Проверка геттера и сеттера `price` в классе `Product`.&#10;  - Тесты для метода `add_product()` и геттера `products` в классе `Category`.&#10;  - Тесты для `new_product()`:&#10;    - Создание нового продукта.&#10;    - Обновление существующего продукта.&#10;  - Добавлен отчёт о покрытии тестами.&#10;&#10;- Обновлён `README.md`:&#10;  - Добавлено описание новой функциональности." />
   </component>
 </project>

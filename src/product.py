@@ -21,6 +21,12 @@ class Product:
         if quantity < 0:
             raise ValueError("Количество не может быть отрицательным")
 
+    def __str__(self):
+        """
+        Строковое представление продукта.
+        """
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
+
     @property
     def price(self):
         """
@@ -83,11 +89,14 @@ class Product:
         product.price = 30.0
         assert product.price == 50.0  # Цена не изменилась
 
-    def __str__(self):
+    def __add__(self, other):
         """
-        Строковое представление продукта.
+        Переопределение оператора сложения.
+        Возвращает полную стоимость двух продуктов на складе.
         """
-        return f"Product(name={self.name}, price={self.price}, quantity={self.quantity})"
+        if not isinstance(other, Product):
+            raise TypeError("Сложение возможно только между объектами Product.")
+        return self.price * self.quantity + other.price * other.quantity
 
 
 # product = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет", 180000.0, 5)
