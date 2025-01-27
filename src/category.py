@@ -1,6 +1,7 @@
 import json
 import os
 from src.product import Product
+from src.category_iterator import CategoryIterator
 
 
 class Category:
@@ -22,59 +23,77 @@ class Category:
         """
         self.name = name
         self.description = description
-        self.products = products if isinstance(products, list) else []
+        self.__products = [] # Приватный список продуктов
         Category.category_count += 1
+
+    def __str__(self):
+        """
+        Строковое представление категории.
+        """
+        total_quantity = sum(product.quantity for product in self.__products)
+        return f"{self.name}, количество продуктов: {total_quantity} шт."
+
+    def __iter__(self):
+        """
+        Возвращает итератор для продуктов категории.
+        """
+        return CategoryIterator(self)
 
     @staticmethod
     def load_from_json(file_path):
         """
         Читает JSON-файл и преобразует данные в объекты Category и Product.
-
-        :param file_path: Путь к JSON-файлу
-        :return: Список объектов Category
         """
-        # Сбрасываем глобальные счётчики перед загрузкой
         Category.category_count = 0
-        Category.product_count = 0
-
-        # Проверяем, существует ли файл
-        if not os.path.exists(file_path):
-            raise FileNotFoundError(f"Файл {file_path} не найден.")
+        Category.product_count = 0  # Сбрасываем глобальные счётчики
 
         with open(file_path, "r", encoding="utf-8") as file:
             data = json.load(file)
 
         categories = []
         for category_data in data["categories"]:
-            # Создаём продукты для категории
-            products = [
-                Product(
-                    product["name"],
-                    product.get("description", "Описание отсутствует"),
-                    product["price"],
-                    product["quantity"],
+            category = Category(category_data["name"], category_data["description"])
+            for product_data in category_data["products"]:
+                product = Product(
+                    product_data["name"],
+                    product_data["description"],
+                    product_data["price"],
+                    product_data["quantity"],
                 )
-                for product in category_data["products"]
-            ]
-
-            # Увеличиваем глобальный счётчик продуктов
-            Category.product_count += len(products)
-
-            # Создаём объект категории
-            category = Category(
-                category_data["name"],
-                category_data.get("description", "Описание категории отсутствует"),
-                products,
-            )
+                category.add_product(product)  # Обновление счётчика только здесь
             categories.append(category)
 
         return categories
+
+    def add_product(self, product):
+        """
+        Добавляет продукт в категорию.
+        """
+        if isinstance(product, Product):
+            self.__products.append(product)
+            Category.product_count += 1  # Увеличение глобального счётчика
+
+    @property
+    def products(self):
+        """
+        Возвращает строку со всеми продуктами в категории.
+        """
+        return "\n".join(
+            f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт."
+            for product in self.__products
+        )
+
+    def get_product_objects(self):
+        """
+        Возвращает список объектов продуктов.
+        """
+        return self.__products
 
     def __str__(self):
         """
         Строковое представление категории.
         """
-        product_list = ", ".join([product.name for product in self.products])
+        product_list = ", ".join([product.name for product in self.__products])
         return f"Category(name={self.name}, products=[{product_list}])"
 
 
