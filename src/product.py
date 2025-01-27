@@ -1,4 +1,8 @@
-class Product:
+from src.base_product import BaseProduct
+from src.creation_logger_mixin import CreationLoggerMixin
+
+
+class Product(CreationLoggerMixin, BaseProduct):
     """
     Класс для описания продукта.
     """
@@ -12,14 +16,12 @@ class Product:
         :param price: Цена продукта
         :param quantity: Количество продукта
         """
-        self.name = name
-        self.description = description
-        self.price = price
-        self.quantity = quantity
+        super().__init__(name, description, price, quantity)
         if price < 0:
             raise ValueError("Цена не может быть отрицательной")
         if quantity < 0:
             raise ValueError("Количество не может быть отрицательным")
+
 
     def __str__(self):
         """
@@ -93,6 +95,9 @@ class Product:
         if type(self) != type(other):  # Проверяем именно тип объекта, а не его наследников
             raise TypeError("Сложение возможно только между объектами одного и того же типа.")
         return self.price * self.quantity + other.price * other.quantity
+
+    def get_total_value(self):
+        return self.price * self.quantity
 
 # product = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет", 180000.0, 5)
 # print(product)  # Output: Product(name=Samsung Galaxy S23 Ultra, price=180000.0, quantity=5)

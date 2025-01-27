@@ -113,3 +113,8 @@ def test_category_add_invalid_product(sample_category):
         sample_category.add_product("Invalid Product")
     except TypeError as e:
         assert str(e) == "Добавлять можно только объекты класса Product или его наследников."
+
+
+def test_product_total_value():
+    product = Product("Test Product", "Test Description", 100.0, 10)
+    assert product.get_total_value() == 1000.0
