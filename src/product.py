@@ -94,8 +94,8 @@ class Product:
         Переопределение оператора сложения.
         Возвращает полную стоимость двух продуктов на складе.
         """
-        if not isinstance(other, Product):
-            raise TypeError("Сложение возможно только между объектами Product.")
+        if not isinstance(other, type(self)):
+            raise TypeError("Сложение возможно только между объектами одного и того же типа.")
         return self.price * self.quantity + other.price * other.quantity
 
 

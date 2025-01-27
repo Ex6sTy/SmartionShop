@@ -70,8 +70,9 @@ class Category:
         Добавляет продукт в категорию.
         """
         if isinstance(product, Product):
-            self.__products.append(product)
-            Category.product_count += 1  # Увеличение глобального счётчика
+            raise TypeError("Добавлять можно только объекты класса Product или его наследников.")
+        self.__products.append(product)
+        Category.product_count += 1
 
     @property
     def products(self):

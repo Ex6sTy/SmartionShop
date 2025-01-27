@@ -101,3 +101,15 @@ def test_product_addition():
     # 180000 * 5 + 210000 * 8 = 3,780,000
     expected_sum = 180000 * 5 + 210000 * 8
     assert product1 + product2 == expected_sum
+
+def test_category_add_product(sample_category):
+    smartphone = Smartphone("iPhone 15", "Флагманский смартфон", 200000.0, 5, 95, "Pro Max", 256, "Silver")
+    sample_category.add_product(smartphone)
+    assert len(sample_category.products.splitlines()) == 4  # Было 3, добавили 1
+
+
+def test_category_add_invalid_product(sample_category):
+    try:
+        sample_category.add_product("Invalid Product")
+    except TypeError as e:
+        assert str(e) == "Добавлять можно только объекты класса Product или его наследников."
