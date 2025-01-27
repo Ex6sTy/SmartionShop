@@ -90,14 +90,9 @@ class Product:
         assert product.price == 50.0  # Цена не изменилась
 
     def __add__(self, other):
-        """
-        Переопределение оператора сложения.
-        Возвращает полную стоимость двух продуктов на складе.
-        """
-        if not isinstance(other, type(self)):
+        if type(self) != type(other):  # Проверяем именно тип объекта, а не его наследников
             raise TypeError("Сложение возможно только между объектами одного и того же типа.")
         return self.price * self.quantity + other.price * other.quantity
-
 
 # product = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет", 180000.0, 5)
 # print(product)  # Output: Product(name=Samsung Galaxy S23 Ultra, price=180000.0, quantity=5)

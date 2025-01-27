@@ -96,7 +96,7 @@ def test_smartphone_addition():
 def test_addition_different_classes():
     smartphone = Smartphone("iPhone 15", "Флагманский смартфон", 200000.0, 5, 95, "Pro Max", 256, "Silver")
     lawn_grass = LawnGrass("Газонная трава", "Идеальная для садов", 1000.0, 20, "Россия", 7, "Зелёный")
-    try:
-        smartphone + lawn_grass
-    except TypeError as e:
-        assert str(e) == "Сложение возможно только между объектами одного и того же типа."
+
+    with pytest.raises(TypeError, match="Сложение возможно только между объектами одного и того же типа."):
+        _ = smartphone + lawn_grass
+
