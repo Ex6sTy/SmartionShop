@@ -16,11 +16,13 @@ class Product(CreationLoggerMixin, BaseProduct):
         :param price: Цена продукта
         :param quantity: Количество продукта
         """
-        super().__init__(name, description, price, quantity)
         if price < 0:
             raise ValueError("Цена не может быть отрицательной")
         if quantity < 0:
             raise ValueError("Количество не может быть отрицательным")
+        if quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
+        super().__init__(name, description, price, quantity)
 
 
     def __str__(self):
