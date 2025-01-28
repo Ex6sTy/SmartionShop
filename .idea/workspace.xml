@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f50b7e2a-a8ca-4368-adc0-646e3405cd82" name="Changes" comment="Реализованы абстрактный класс, миксин и функционал заказов&#10;&#10;- Добавлен абстрактный класс `BaseProduct`:&#10;  - Выделена общая функциональность для продуктов.&#10;  - Классы `Product`, `Smartphone` и `LawnGrass` наследуются от `BaseProduct`.&#10;&#10;- Реализован миксин `CreationLoggerMixin`:&#10;  - Логирует информацию о создании объектов продуктов.&#10;&#10;- Доработаны классы `Product`, `Smartphone`, `LawnGrass`:&#10;  - Включены функционал миксина и методы абстрактного класса.&#10;&#10;- Добавлен класс `Order`:&#10;  - Описывает заказы на товары.&#10;  - Вычисляет итоговую стоимость заказа.&#10;&#10;- Написаны тесты:&#10;  - Для абстрактного класса, миксина и класса `Order`.&#10;  - Проверена совместимость с существующими тестами.&#10;&#10;- Обновлено README:&#10;  - Добавлено описание нового функционала.">
+    <list default="true" id="f50b7e2a-a8ca-4368-adc0-646e3405cd82" name="Changes" comment="Обработка нулевого количества при создании товара">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/product.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/category.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/category.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_category.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_category.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_product.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,7 +202,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737984335665</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Обработка нулевого количества при создании товара">
+      <option name="closed" value="true" />
+      <created>1738067207445</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1738067207445</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -223,6 +233,7 @@
     <MESSAGE value="Реализованы классы-наследники и ограничения для магазина&#10;&#10;- Добавлены классы-наследники:&#10;  - `Smartphone` (Смартфон) с атрибутами: производительность, модель, память, цвет.&#10;  - `LawnGrass` (Газонная трава) с атрибутами: страна-производитель, срок прорастания, цвет.&#10;&#10;- Ограничения сложения товаров:&#10;  - Реализовано сложение только для объектов одного типа (`Product` и его наследников).&#10;  - При попытке сложения разных типов выбрасывается `TypeError`.&#10;&#10;- Ограничения добавления в категорию:&#10;  - Добавлять в категорию можно только объекты класса `Product` и его наследников.&#10;  - Проверка реализована через `isinstance`.&#10;&#10;- Написаны тесты:&#10;  - Для строкового представления (`__str__`) классов-наследников.&#10;  - Для ограничения сложения товаров разных типов.&#10;  - Для ограничения добавления некорректных объектов в категории.&#10;&#10;- README обновлено:&#10;  - Добавлено описание новой функциональности." />
     <MESSAGE value="Исправлена проверка типов при сложении объектов&#10;&#10;- В методе `__add__` заменён `isinstance` на `type` для проверки, что сложение возможно только между объектами одного и того же класса.&#10;- Обновлены тесты для проверки корректной работы ограничений сложения." />
     <MESSAGE value="Реализованы абстрактный класс, миксин и функционал заказов&#10;&#10;- Добавлен абстрактный класс `BaseProduct`:&#10;  - Выделена общая функциональность для продуктов.&#10;  - Классы `Product`, `Smartphone` и `LawnGrass` наследуются от `BaseProduct`.&#10;&#10;- Реализован миксин `CreationLoggerMixin`:&#10;  - Логирует информацию о создании объектов продуктов.&#10;&#10;- Доработаны классы `Product`, `Smartphone`, `LawnGrass`:&#10;  - Включены функционал миксина и методы абстрактного класса.&#10;&#10;- Добавлен класс `Order`:&#10;  - Описывает заказы на товары.&#10;  - Вычисляет итоговую стоимость заказа.&#10;&#10;- Написаны тесты:&#10;  - Для абстрактного класса, миксина и класса `Order`.&#10;  - Проверена совместимость с существующими тестами.&#10;&#10;- Обновлено README:&#10;  - Добавлено описание нового функционала." />
-    <option name="LAST_COMMIT_MESSAGE" value="Реализованы абстрактный класс, миксин и функционал заказов&#10;&#10;- Добавлен абстрактный класс `BaseProduct`:&#10;  - Выделена общая функциональность для продуктов.&#10;  - Классы `Product`, `Smartphone` и `LawnGrass` наследуются от `BaseProduct`.&#10;&#10;- Реализован миксин `CreationLoggerMixin`:&#10;  - Логирует информацию о создании объектов продуктов.&#10;&#10;- Доработаны классы `Product`, `Smartphone`, `LawnGrass`:&#10;  - Включены функционал миксина и методы абстрактного класса.&#10;&#10;- Добавлен класс `Order`:&#10;  - Описывает заказы на товары.&#10;  - Вычисляет итоговую стоимость заказа.&#10;&#10;- Написаны тесты:&#10;  - Для абстрактного класса, миксина и класса `Order`.&#10;  - Проверена совместимость с существующими тестами.&#10;&#10;- Обновлено README:&#10;  - Добавлено описание нового функционала." />
+    <MESSAGE value="Обработка нулевого количества при создании товара" />
+    <option name="LAST_COMMIT_MESSAGE" value="Обработка нулевого количества при создании товара" />
   </component>
 </project>

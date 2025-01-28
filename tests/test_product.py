@@ -118,3 +118,12 @@ def test_category_add_invalid_product(sample_category):
 def test_product_total_value():
     product = Product("Test Product", "Test Description", 100.0, 10)
     assert product.get_total_value() == 1000.0
+
+    
+def test_product_zero_quantity():
+    """
+    Проверяет выброс исключения при создании товара с нулевым количеством.
+    """
+    with pytest.raises(ValueError, match="Товар с нулевым количеством не может быть добавлен"):
+        Product("Test Product", "Test Description", 100.0, 0)
+

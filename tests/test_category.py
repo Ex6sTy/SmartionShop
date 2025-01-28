@@ -76,3 +76,18 @@ def test_category_str_representation(sample_category):
 def test_category_iteration(sample_category):
     products = [p.name for p in sample_category]
     assert products == ["Samsung Galaxy S23 Ultra", "Iphone 15", "Xiaomi Redmi Note 11"]
+
+def test_calculate_average_price(sample_category):
+    """
+    Проверяет корректность подсчета средней цены товаров в категории.
+    """
+    avg_price = sample_category.calculate_average_price()
+    assert avg_price == pytest.approx(140666.67, 0.01)
+
+
+def test_calculate_average_price_empty_category():
+    """
+    Проверяет, что метод возвращает 0 для пустой категории.
+    """
+    empty_category = Category("Empty Category", "No products", [])
+    assert empty_category.calculate_average_price() == 0

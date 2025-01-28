@@ -1,7 +1,15 @@
 import json
 import os
+from itertools import product
+
 from src.product import Product
 from src.category_iterator import CategoryIterator
+
+class ZeroQuantityError(Exception):
+    """
+    Исключенние для обработки попытки добавить товар с нулевым количеством.
+    """
+    pass
 
 
 class Category:
@@ -69,6 +77,16 @@ class Category:
         """
         Добавляет продукт в категорию.
         """
+        try:
+            if product.quantity == 0:
+                raise ZeroQuantityError(f"Товар {product.name} с нулевым количеством не может быть добавлен.")
+        except ZeroQuantityError as e:
+            print(e)
+        else:
+            self.__products.append(product)
+        finally:
+            print("Обработка добавления товара завершена.")
+            
         if isinstance(product, Product):
             raise TypeError("Добавлять можно только объекты класса Product или его наследников.")
         self.__products.append(product)
@@ -96,6 +114,16 @@ class Category:
         """
         product_list = ", ".join([product.name for product in self.__products])
         return f"Category(name={self.name}, products=[{product_list}])"
+
+    def calculate_average_price(self):
+        """
+        Подсчитывает среднюю цену товаров в категории.
+        :return: Средняя цена или 0, если товаров нет.
+        """
+        try:
+            return sum(product.__price for product in self.__products) / len(self.__products)
+        except ZeroDivisionError:
+            return 0
 
 
 # if __name__ == "__main__":
