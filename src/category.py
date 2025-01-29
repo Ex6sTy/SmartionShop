@@ -50,7 +50,7 @@ class Category:
     @staticmethod
     def load_from_json(file_path):
         Category.category_count = 0
-        Category.product_count = 0  # Сбрасываем глобальные счётчики
+        Category.product_count = 0  # 🔄 Сбрасываем счётчики перед загрузкой
 
         with open(file_path, "r", encoding="utf-8") as file:
             data = json.load(file)
@@ -65,12 +65,10 @@ class Category:
                     product_data["price"],
                     product_data["quantity"],
                 )
-                print(f"Добавляем продукт: {product.name}")  # 🛠 DEBUG
                 category.add_product(product)
-                print(f"Category.product_count после добавления {product.name}: {Category.product_count}")  # 🛠 DEBUG
             categories.append(category)
 
-        print(f"Финальный Category.product_count: {Category.product_count}")  # 🛠 DEBUG
+        print(f"Загружено продуктов: {Category.product_count}")  # DEBUG
         return categories
 
     def add_product(self, product):
@@ -84,7 +82,7 @@ class Category:
             if not isinstance(product, Product):
                 raise TypeError("Добавлять можно только объекты класса Product или его наследников.")
             self.__products.append(product)
-            Category.product_count += 1  # При добавлении продукта просто увеличиваем счётчик на 1
+            Category.product_count += product.quantity
         finally:
             print(f"Category.product_count после добавления: {Category.product_count}")
             print("Обработка добавления товара завершена.")

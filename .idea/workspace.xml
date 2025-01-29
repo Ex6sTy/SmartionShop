@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f50b7e2a-a8ca-4368-adc0-646e3405cd82" name="Changes" comment="Добавлены обработка исключений и метод подсчета среднего ценника&#10;&#10;- В классе `Product` реализована проверка нулевого количества при создании:&#10;  - Если количество товара равно 0, выбрасывается исключение `ValueError` с сообщением: «Товар с нулевым количеством не может быть добавлен».&#10;&#10;- В классе `Category` добавлен метод `calculate_average_price`:&#10;  - Подсчитывает среднюю цену товаров в категории.&#10;  - Возвращает 0, если в категории нет товаров (обработан случай деления на ноль).&#10;&#10;- Реализован пользовательский класс исключений `ZeroQuantityError`:&#10;  - Используется для обработки событий добавления товаров с нулевым количеством в категорию.&#10;&#10;- Доработан метод `add_product` в классе `Category`:&#10;  - Обрабатывает исключение `ZeroQuantityError`.&#10;  - Выводит сообщение об успешной или неуспешной попытке добавления товара.&#10;  - Гарантирует завершение обработки добавления с помощью блока `finally`.&#10;&#10;- Написаны тесты:&#10;  - Проверка выброса исключения при создании товара с нулевым количеством.&#10;  - Тестирование метода подсчета среднего ценника в категории.&#10;  - Проверка работы пользовательского исключения `ZeroQuantityError`.&#10;&#10;- Обновлено README:&#10;  - Добавлено описание нового функционала.">
+      <change afterPath="$PROJECT_DIR$/tests/test_order.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/category.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/category.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/product.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/product.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_base_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_base_product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_category.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_category.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_smartphone.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_smartphone.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +59,13 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python tests.Python tests for test_product.test_product_new_product_with_duplicates.executor": "Run",
+    "Python tests.Python tests for test_product.test_product_new_product_without_duplicates.executor": "Run",
+    "Python tests.Python tests for test_product.test_product_price_setter_negative.executor": "Run",
     "Python tests.Python tests for test_product.test_product_total_value.executor": "Run",
+    "Python tests.Python tests in test_category.py.executor": "Run",
+    "Python tests.Python tests in test_main.py.executor": "Run",
+    "Python tests.Python tests in test_product.py.executor": "Run",
     "Python.category.executor": "Run",
     "Python.conftest.executor": "Run",
     "Python.main.executor": "Run",
@@ -70,7 +82,7 @@
       <recent name="C:\Users\aboga\PycharmProjects\SmartionShop\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.category">
+  <component name="RunManager">
     <configuration name="category" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="SmartionShop" />
       <option name="ENV_FILES" value="" />
@@ -93,6 +105,51 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Python tests for test_product.test_product_new_product_with_duplicates" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="SmartionShop" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_product.test_product_new_product_with_duplicates&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_product.test_product_new_product_without_duplicates" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="SmartionShop" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_product.test_product_new_product_without_duplicates&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_product.test_product_price_setter_negative" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="SmartionShop" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_product.test_product_price_setter_negative&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <configuration name="Python tests for test_product.test_product_total_value" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="SmartionShop" />
       <option name="ENV_FILES" value="" />
@@ -108,8 +165,29 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration default="true" type="tests" factoryName="py.test">
+      <module name="SmartionShop" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Poetry (Lesson10. testing)" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Python tests for test_product.test_product_new_product_with_duplicates" />
+        <item itemvalue="Python tests.Python tests for test_product.test_product_new_product_without_duplicates" />
+        <item itemvalue="Python tests.Python tests for test_product.test_product_price_setter_negative" />
         <item itemvalue="Python tests.Python tests for test_product.test_product_total_value" />
       </list>
     </recent_temporary>

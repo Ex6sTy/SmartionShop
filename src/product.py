@@ -43,7 +43,7 @@ class Product(CreationLoggerMixin, BaseProduct):
             print("Цена не должна быть нулевая или отрицательная")
             return
 
-        if new_price < self.__price:
+        if new_price < self.price:
             confirm = input(
                 f"Вы уверены, что хотите снизить цену с {self.__price} до {new_price}? (y/n): "
             )
