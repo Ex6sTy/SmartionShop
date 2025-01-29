@@ -2,6 +2,8 @@ import pytest
 import json
 from src.product import Product
 from src.category import Category
+from src.smartphone import Smartphone
+from src.lawngrass import LawnGrass
 
 
 @pytest.fixture
@@ -43,8 +45,6 @@ def temp_json_file(tmp_path):
     return file_path
 
 
-
-
 @pytest.fixture
 def sample_products():
     """
@@ -67,11 +67,16 @@ def sample_category(sample_products):
     :param sample_products: Фикстура со списком продуктов
     :return: Объект Category
     """
-    return Category(
+    category = Category(
         "Смартфоны",
-        "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
-        sample_products,
+        "Современные устройства для связи и развлечений",
+        []
     )
+
+    for product in sample_products:
+        category.add_product(product)
+
+    return category
 
 
 @pytest.fixture(autouse=True)
@@ -85,4 +90,33 @@ def reset_category_counters():
 
 @pytest.fixture
 def product_data():
+    """Возвращает словарь с тестовыми данными для продукта."""
     return {"name": "Xiaomi Redmi Note 11", "description": "1024GB, Синий", "price": 31000.0, "quantity": 14}
+
+
+@pytest.fixture
+def sample_smartphone():
+    """Создаёт тестовый объект Smartphone."""
+    return Smartphone("iPhone 15", "Флагманский смартфон", 200000.0, 5, 95, "Pro Max", 256, "Silver")
+
+
+@pytest.fixture
+def sample_lawn_grass():
+    """Создаёт тестовый объект LawnGrass."""
+    return LawnGrass("Газонная трава", "Для сада", 1000.0, 20, "Россия", 7, "Зелёный")
+
+
+def test_smartphone_addition():
+    """Проверка корректного сложения смартфонов."""
+    smartphone1 = Smartphone("iPhone 15", "Флагманский смартфон", 200000.0, 5, 95, "Pro Max", 256, "Silver")
+    smartphone2 = Smartphone("Samsung Galaxy S23", "Флагманский смартфон", 180000.0, 8, 90, "Ultra", 512, "Black")
+    assert smartphone1 + smartphone2 == 200000.0 * 5 + 180000.0 * 8
+
+
+def test_addition_different_classes():
+    """Проверка невозможности сложения товаров разных типов."""
+    smartphone = Smartphone("iPhone 15", "Флагманский смартфон", 200000.0, 5, 95, "Pro Max", 256, "Silver")
+    lawn_grass = LawnGrass("Газонная трава", "Идеальная для садов", 1000.0, 20, "Россия", 7, "Зелёный")
+
+    with pytest.raises(TypeError, match="Сложение возможно только между объектами одного и того же типа."):
+        _ = smartphone + lawn_grass

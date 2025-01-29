@@ -1,7 +1,15 @@
 import json
 import os
+from itertools import product
+
 from src.product import Product
 from src.category_iterator import CategoryIterator
+
+class ZeroQuantityError(Exception):
+    """
+    Исключенние для обработки попытки добавить товар с нулевым количеством.
+    """
+    pass
 
 
 class Category:
@@ -41,11 +49,8 @@ class Category:
 
     @staticmethod
     def load_from_json(file_path):
-        """
-        Читает JSON-файл и преобразует данные в объекты Category и Product.
-        """
         Category.category_count = 0
-        Category.product_count = 0  # Сбрасываем глобальные счётчики
+        Category.product_count = 0  # 🔄 Сбрасываем счётчики перед загрузкой
 
         with open(file_path, "r", encoding="utf-8") as file:
             data = json.load(file)
@@ -60,18 +65,27 @@ class Category:
                     product_data["price"],
                     product_data["quantity"],
                 )
-                category.add_product(product)  # Обновление счётчика только здесь
+                category.add_product(product)
             categories.append(category)
 
+        print(f"Загружено продуктов: {Category.product_count}")  # DEBUG
         return categories
 
     def add_product(self, product):
-        """
-        Добавляет продукт в категорию.
-        """
-        if isinstance(product, Product):
+        """Добавляет продукт в категорию."""
+        try:
+            if product.quantity == 0:
+                raise ZeroQuantityError(f"Товар {product.name} с нулевым количеством не может быть добавлен.")
+        except ZeroQuantityError as e:
+            print(e)
+        else:
+            if not isinstance(product, Product):
+                raise TypeError("Добавлять можно только объекты класса Product или его наследников.")
             self.__products.append(product)
-            Category.product_count += 1  # Увеличение глобального счётчика
+            Category.product_count += product.quantity
+        finally:
+            print(f"Category.product_count после добавления: {Category.product_count}")
+            print("Обработка добавления товара завершена.")
 
     @property
     def products(self):
@@ -93,8 +107,16 @@ class Category:
         """
         Строковое представление категории.
         """
-        product_list = ", ".join([product.name for product in self.__products])
-        return f"Category(name={self.name}, products=[{product_list}])"
+        return f"{self.name}, количество продуктов: {sum(product.quantity for product in self.__products)} шт."
+
+    def calculate_average_price(self):
+        """
+        Подсчитывает среднюю цену товаров в категории.
+        """
+        try:
+            return sum(product.price for product in self.__products) / len(self.__products)
+        except ZeroDivisionError:
+            return 0
 
 
 # if __name__ == "__main__":

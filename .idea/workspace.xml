@@ -4,14 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f50b7e2a-a8ca-4368-adc0-646e3405cd82" name="Changes" comment="Реализовано расширение функциональности для классов Category и Product&#10;&#10;- В классе `Category`:&#10;  - Приватный режим доступа для атрибута `products`.&#10;  - Реализован метод `add_product()` для добавления продуктов в категорию.&#10;  - Добавлен геттер `products`, возвращающий строку со списком продуктов в формате: &quot;Название продукта, X руб. Остаток: X шт.\n&quot;.&#10;&#10;- В классе `Product`:&#10;  - Приватный режим доступа для атрибута `price`.&#10;  - Реализованы геттер и сеттер для `price`:&#10;    - Сеттер проверяет, что цена не может быть отрицательной или нулевой.&#10;    - При снижении цены требуется подтверждение пользователя.&#10;  - Реализован класс-метод `new_product()`, создающий объект на основе словаря:&#10;    - Обновляет количество, если продукт с таким именем уже существует.&#10;    - Выбирает максимальную цену в случае конфликта.&#10;&#10;- Написаны тесты для новой функциональности:&#10;  - Проверка геттера и сеттера `price` в классе `Product`.&#10;  - Тесты для метода `add_product()` и геттера `products` в классе `Category`.&#10;  - Тесты для `new_product()`:&#10;    - Создание нового продукта.&#10;    - Обновление существующего продукта.&#10;  - Добавлен отчёт о покрытии тестами.&#10;&#10;- Обновлён `README.md`:&#10;  - Добавлено описание новой функциональности.">
-      <change afterPath="$PROJECT_DIR$/src/category_iterator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_category_iterator.py" afterDir="false" />
+    <list default="true" id="f50b7e2a-a8ca-4368-adc0-646e3405cd82" name="Changes" comment="Добавлены обработка исключений и метод подсчета среднего ценника&#10;&#10;- В классе `Product` реализована проверка нулевого количества при создании:&#10;  - Если количество товара равно 0, выбрасывается исключение `ValueError` с сообщением: «Товар с нулевым количеством не может быть добавлен».&#10;&#10;- В классе `Category` добавлен метод `calculate_average_price`:&#10;  - Подсчитывает среднюю цену товаров в категории.&#10;  - Возвращает 0, если в категории нет товаров (обработан случай деления на ноль).&#10;&#10;- Реализован пользовательский класс исключений `ZeroQuantityError`:&#10;  - Используется для обработки событий добавления товаров с нулевым количеством в категорию.&#10;&#10;- Доработан метод `add_product` в классе `Category`:&#10;  - Обрабатывает исключение `ZeroQuantityError`.&#10;  - Выводит сообщение об успешной или неуспешной попытке добавления товара.&#10;  - Гарантирует завершение обработки добавления с помощью блока `finally`.&#10;&#10;- Написаны тесты:&#10;  - Проверка выброса исключения при создании товара с нулевым количеством.&#10;  - Тестирование метода подсчета среднего ценника в категории.&#10;  - Проверка работы пользовательского исключения `ZeroQuantityError`.&#10;&#10;- Обновлено README:&#10;  - Добавлено описание нового функционала.">
+      <change afterPath="$PROJECT_DIR$/tests/test_order.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/category.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/category.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/product.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_base_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_base_product.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_category.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_category.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_main.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_smartphone.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_smartphone.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +31,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Feature" />
+        <entry key="$PROJECT_DIR$" value="Feature4" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -56,6 +59,13 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python tests.Python tests for test_product.test_product_new_product_with_duplicates.executor": "Run",
+    "Python tests.Python tests for test_product.test_product_new_product_without_duplicates.executor": "Run",
+    "Python tests.Python tests for test_product.test_product_price_setter_negative.executor": "Run",
+    "Python tests.Python tests for test_product.test_product_total_value.executor": "Run",
+    "Python tests.Python tests in test_category.py.executor": "Run",
+    "Python tests.Python tests in test_main.py.executor": "Run",
+    "Python tests.Python tests in test_product.py.executor": "Run",
     "Python.category.executor": "Run",
     "Python.conftest.executor": "Run",
     "Python.main.executor": "Run",
@@ -63,7 +73,7 @@
     "Python.test_main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "#3 on Feature"
+    "git-widget-placeholder": "Feature5"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -95,6 +105,92 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Python tests for test_product.test_product_new_product_with_duplicates" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="SmartionShop" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_product.test_product_new_product_with_duplicates&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_product.test_product_new_product_without_duplicates" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="SmartionShop" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_product.test_product_new_product_without_duplicates&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_product.test_product_price_setter_negative" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="SmartionShop" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_product.test_product_price_setter_negative&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_product.test_product_total_value" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="SmartionShop" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_product.test_product_total_value&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="py.test">
+      <module name="SmartionShop" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Poetry (Lesson10. testing)" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.Python tests for test_product.test_product_new_product_with_duplicates" />
+        <item itemvalue="Python tests.Python tests for test_product.test_product_new_product_without_duplicates" />
+        <item itemvalue="Python tests.Python tests for test_product.test_product_price_setter_negative" />
+        <item itemvalue="Python tests.Python tests for test_product.test_product_total_value" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -144,7 +240,63 @@
       <option name="project" value="LOCAL" />
       <updated>1737384417657</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Реализовано строковое представление и магический метод сложения&#10;&#10;- Для класса `Product`:&#10;  - Реализован метод `__str__`, возвращающий строку: &quot;Название продукта, X руб. Остаток: X шт.&quot;&#10;  - Реализован метод `__add__`, возвращающий сумму полной стоимости двух объектов.&#10;&#10;- Для класса `Category`:&#10;  - Реализован метод `__str__`, возвращающий строку: &quot;Название категории, количество продуктов: X шт.&quot;&#10;  - Рассчитывается общее количество товаров в категории.&#10;&#10;- Реализован дополнительный класс-итератор:&#10;  - Позволяет перебирать товары категории в цикле `for`.&#10;&#10;- Написаны тесты для новой функциональности:&#10;  - Проверка методов `__str__` и `__add__`.&#10;  - Проверка итерации по товарам категории.&#10;&#10;- Обновлён README.md:&#10;  - Описание строкового представления и магических методов.">
+      <option name="closed" value="true" />
+      <created>1737467780846</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1737467780846</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Реализованы классы-наследники и ограничения для магазина&#10;&#10;- Добавлены классы-наследники:&#10;  - `Smartphone` (Смартфон) с атрибутами: производительность, модель, память, цвет.&#10;  - `LawnGrass` (Газонная трава) с атрибутами: страна-производитель, срок прорастания, цвет.&#10;&#10;- Ограничения сложения товаров:&#10;  - Реализовано сложение только для объектов одного типа (`Product` и его наследников).&#10;  - При попытке сложения разных типов выбрасывается `TypeError`.&#10;&#10;- Ограничения добавления в категорию:&#10;  - Добавлять в категорию можно только объекты класса `Product` и его наследников.&#10;  - Проверка реализована через `isinstance`.&#10;&#10;- Написаны тесты:&#10;  - Для строкового представления (`__str__`) классов-наследников.&#10;  - Для ограничения сложения товаров разных типов.&#10;  - Для ограничения добавления некорректных объектов в категории.&#10;&#10;- README обновлено:&#10;  - Добавлено описание новой функциональности.">
+      <option name="closed" value="true" />
+      <created>1737972291080</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1737972291080</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Исправлена проверка типов при сложении объектов&#10;&#10;- В методе `__add__` заменён `isinstance` на `type` для проверки, что сложение возможно только между объектами одного и того же класса.&#10;- Обновлены тесты для проверки корректной работы ограничений сложения.">
+      <option name="closed" value="true" />
+      <created>1737976758957</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1737976758957</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Исправлена проверка типов при сложении объектов&#10;&#10;- В методе `__add__` заменён `isinstance` на `type` для проверки, что сложение возможно только между объектами одного и того же класса.&#10;- Обновлены тесты для проверки корректной работы ограничений сложения.">
+      <option name="closed" value="true" />
+      <created>1737976982896</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1737976982896</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Реализованы абстрактный класс, миксин и функционал заказов&#10;&#10;- Добавлен абстрактный класс `BaseProduct`:&#10;  - Выделена общая функциональность для продуктов.&#10;  - Классы `Product`, `Smartphone` и `LawnGrass` наследуются от `BaseProduct`.&#10;&#10;- Реализован миксин `CreationLoggerMixin`:&#10;  - Логирует информацию о создании объектов продуктов.&#10;&#10;- Доработаны классы `Product`, `Smartphone`, `LawnGrass`:&#10;  - Включены функционал миксина и методы абстрактного класса.&#10;&#10;- Добавлен класс `Order`:&#10;  - Описывает заказы на товары.&#10;  - Вычисляет итоговую стоимость заказа.&#10;&#10;- Написаны тесты:&#10;  - Для абстрактного класса, миксина и класса `Order`.&#10;  - Проверена совместимость с существующими тестами.&#10;&#10;- Обновлено README:&#10;  - Добавлено описание нового функционала.">
+      <option name="closed" value="true" />
+      <created>1737984335665</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1737984335665</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Обработка нулевого количества при создании товара">
+      <option name="closed" value="true" />
+      <created>1738067207445</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1738067207445</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Добавлены обработка исключений и метод подсчета среднего ценника&#10;&#10;- В классе `Product` реализована проверка нулевого количества при создании:&#10;  - Если количество товара равно 0, выбрасывается исключение `ValueError` с сообщением: «Товар с нулевым количеством не может быть добавлен».&#10;&#10;- В классе `Category` добавлен метод `calculate_average_price`:&#10;  - Подсчитывает среднюю цену товаров в категории.&#10;  - Возвращает 0, если в категории нет товаров (обработан случай деления на ноль).&#10;&#10;- Реализован пользовательский класс исключений `ZeroQuantityError`:&#10;  - Используется для обработки событий добавления товаров с нулевым количеством в категорию.&#10;&#10;- Доработан метод `add_product` в классе `Category`:&#10;  - Обрабатывает исключение `ZeroQuantityError`.&#10;  - Выводит сообщение об успешной или неуспешной попытке добавления товара.&#10;  - Гарантирует завершение обработки добавления с помощью блока `finally`.&#10;&#10;- Написаны тесты:&#10;  - Проверка выброса исключения при создании товара с нулевым количеством.&#10;  - Тестирование метода подсчета среднего ценника в категории.&#10;  - Проверка работы пользовательского исключения `ZeroQuantityError`.&#10;&#10;- Обновлено README:&#10;  - Добавлено описание нового функционала.">
+      <option name="closed" value="true" />
+      <created>1738068014749</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1738068014749</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -163,6 +315,12 @@
     <MESSAGE value="Исправление ошибок" />
     <MESSAGE value="Добавление README файла" />
     <MESSAGE value="Реализовано расширение функциональности для классов Category и Product&#10;&#10;- В классе `Category`:&#10;  - Приватный режим доступа для атрибута `products`.&#10;  - Реализован метод `add_product()` для добавления продуктов в категорию.&#10;  - Добавлен геттер `products`, возвращающий строку со списком продуктов в формате: &quot;Название продукта, X руб. Остаток: X шт.\n&quot;.&#10;&#10;- В классе `Product`:&#10;  - Приватный режим доступа для атрибута `price`.&#10;  - Реализованы геттер и сеттер для `price`:&#10;    - Сеттер проверяет, что цена не может быть отрицательной или нулевой.&#10;    - При снижении цены требуется подтверждение пользователя.&#10;  - Реализован класс-метод `new_product()`, создающий объект на основе словаря:&#10;    - Обновляет количество, если продукт с таким именем уже существует.&#10;    - Выбирает максимальную цену в случае конфликта.&#10;&#10;- Написаны тесты для новой функциональности:&#10;  - Проверка геттера и сеттера `price` в классе `Product`.&#10;  - Тесты для метода `add_product()` и геттера `products` в классе `Category`.&#10;  - Тесты для `new_product()`:&#10;    - Создание нового продукта.&#10;    - Обновление существующего продукта.&#10;  - Добавлен отчёт о покрытии тестами.&#10;&#10;- Обновлён `README.md`:&#10;  - Добавлено описание новой функциональности." />
-    <option name="LAST_COMMIT_MESSAGE" value="Реализовано расширение функциональности для классов Category и Product&#10;&#10;- В классе `Category`:&#10;  - Приватный режим доступа для атрибута `products`.&#10;  - Реализован метод `add_product()` для добавления продуктов в категорию.&#10;  - Добавлен геттер `products`, возвращающий строку со списком продуктов в формате: &quot;Название продукта, X руб. Остаток: X шт.\n&quot;.&#10;&#10;- В классе `Product`:&#10;  - Приватный режим доступа для атрибута `price`.&#10;  - Реализованы геттер и сеттер для `price`:&#10;    - Сеттер проверяет, что цена не может быть отрицательной или нулевой.&#10;    - При снижении цены требуется подтверждение пользователя.&#10;  - Реализован класс-метод `new_product()`, создающий объект на основе словаря:&#10;    - Обновляет количество, если продукт с таким именем уже существует.&#10;    - Выбирает максимальную цену в случае конфликта.&#10;&#10;- Написаны тесты для новой функциональности:&#10;  - Проверка геттера и сеттера `price` в классе `Product`.&#10;  - Тесты для метода `add_product()` и геттера `products` в классе `Category`.&#10;  - Тесты для `new_product()`:&#10;    - Создание нового продукта.&#10;    - Обновление существующего продукта.&#10;  - Добавлен отчёт о покрытии тестами.&#10;&#10;- Обновлён `README.md`:&#10;  - Добавлено описание новой функциональности." />
+    <MESSAGE value="Реализовано строковое представление и магический метод сложения&#10;&#10;- Для класса `Product`:&#10;  - Реализован метод `__str__`, возвращающий строку: &quot;Название продукта, X руб. Остаток: X шт.&quot;&#10;  - Реализован метод `__add__`, возвращающий сумму полной стоимости двух объектов.&#10;&#10;- Для класса `Category`:&#10;  - Реализован метод `__str__`, возвращающий строку: &quot;Название категории, количество продуктов: X шт.&quot;&#10;  - Рассчитывается общее количество товаров в категории.&#10;&#10;- Реализован дополнительный класс-итератор:&#10;  - Позволяет перебирать товары категории в цикле `for`.&#10;&#10;- Написаны тесты для новой функциональности:&#10;  - Проверка методов `__str__` и `__add__`.&#10;  - Проверка итерации по товарам категории.&#10;&#10;- Обновлён README.md:&#10;  - Описание строкового представления и магических методов." />
+    <MESSAGE value="Реализованы классы-наследники и ограничения для магазина&#10;&#10;- Добавлены классы-наследники:&#10;  - `Smartphone` (Смартфон) с атрибутами: производительность, модель, память, цвет.&#10;  - `LawnGrass` (Газонная трава) с атрибутами: страна-производитель, срок прорастания, цвет.&#10;&#10;- Ограничения сложения товаров:&#10;  - Реализовано сложение только для объектов одного типа (`Product` и его наследников).&#10;  - При попытке сложения разных типов выбрасывается `TypeError`.&#10;&#10;- Ограничения добавления в категорию:&#10;  - Добавлять в категорию можно только объекты класса `Product` и его наследников.&#10;  - Проверка реализована через `isinstance`.&#10;&#10;- Написаны тесты:&#10;  - Для строкового представления (`__str__`) классов-наследников.&#10;  - Для ограничения сложения товаров разных типов.&#10;  - Для ограничения добавления некорректных объектов в категории.&#10;&#10;- README обновлено:&#10;  - Добавлено описание новой функциональности." />
+    <MESSAGE value="Исправлена проверка типов при сложении объектов&#10;&#10;- В методе `__add__` заменён `isinstance` на `type` для проверки, что сложение возможно только между объектами одного и того же класса.&#10;- Обновлены тесты для проверки корректной работы ограничений сложения." />
+    <MESSAGE value="Реализованы абстрактный класс, миксин и функционал заказов&#10;&#10;- Добавлен абстрактный класс `BaseProduct`:&#10;  - Выделена общая функциональность для продуктов.&#10;  - Классы `Product`, `Smartphone` и `LawnGrass` наследуются от `BaseProduct`.&#10;&#10;- Реализован миксин `CreationLoggerMixin`:&#10;  - Логирует информацию о создании объектов продуктов.&#10;&#10;- Доработаны классы `Product`, `Smartphone`, `LawnGrass`:&#10;  - Включены функционал миксина и методы абстрактного класса.&#10;&#10;- Добавлен класс `Order`:&#10;  - Описывает заказы на товары.&#10;  - Вычисляет итоговую стоимость заказа.&#10;&#10;- Написаны тесты:&#10;  - Для абстрактного класса, миксина и класса `Order`.&#10;  - Проверена совместимость с существующими тестами.&#10;&#10;- Обновлено README:&#10;  - Добавлено описание нового функционала." />
+    <MESSAGE value="Обработка нулевого количества при создании товара" />
+    <MESSAGE value="Добавлены обработка исключений и метод подсчета среднего ценника&#10;&#10;- В классе `Product` реализована проверка нулевого количества при создании:&#10;  - Если количество товара равно 0, выбрасывается исключение `ValueError` с сообщением: «Товар с нулевым количеством не может быть добавлен».&#10;&#10;- В классе `Category` добавлен метод `calculate_average_price`:&#10;  - Подсчитывает среднюю цену товаров в категории.&#10;  - Возвращает 0, если в категории нет товаров (обработан случай деления на ноль).&#10;&#10;- Реализован пользовательский класс исключений `ZeroQuantityError`:&#10;  - Используется для обработки событий добавления товаров с нулевым количеством в категорию.&#10;&#10;- Доработан метод `add_product` в классе `Category`:&#10;  - Обрабатывает исключение `ZeroQuantityError`.&#10;  - Выводит сообщение об успешной или неуспешной попытке добавления товара.&#10;  - Гарантирует завершение обработки добавления с помощью блока `finally`.&#10;&#10;- Написаны тесты:&#10;  - Проверка выброса исключения при создании товара с нулевым количеством.&#10;  - Тестирование метода подсчета среднего ценника в категории.&#10;  - Проверка работы пользовательского исключения `ZeroQuantityError`.&#10;&#10;- Обновлено README:&#10;  - Добавлено описание нового функционала." />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлены обработка исключений и метод подсчета среднего ценника&#10;&#10;- В классе `Product` реализована проверка нулевого количества при создании:&#10;  - Если количество товара равно 0, выбрасывается исключение `ValueError` с сообщением: «Товар с нулевым количеством не может быть добавлен».&#10;&#10;- В классе `Category` добавлен метод `calculate_average_price`:&#10;  - Подсчитывает среднюю цену товаров в категории.&#10;  - Возвращает 0, если в категории нет товаров (обработан случай деления на ноль).&#10;&#10;- Реализован пользовательский класс исключений `ZeroQuantityError`:&#10;  - Используется для обработки событий добавления товаров с нулевым количеством в категорию.&#10;&#10;- Доработан метод `add_product` в классе `Category`:&#10;  - Обрабатывает исключение `ZeroQuantityError`.&#10;  - Выводит сообщение об успешной или неуспешной попытке добавления товара.&#10;  - Гарантирует завершение обработки добавления с помощью блока `finally`.&#10;&#10;- Написаны тесты:&#10;  - Проверка выброса исключения при создании товара с нулевым количеством.&#10;  - Тестирование метода подсчета среднего ценника в категории.&#10;  - Проверка работы пользовательского исключения `ZeroQuantityError`.&#10;&#10;- Обновлено README:&#10;  - Добавлено описание нового функционала." />
   </component>
 </project>
