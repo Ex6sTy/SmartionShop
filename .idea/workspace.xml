@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f50b7e2a-a8ca-4368-adc0-646e3405cd82" name="Changes" comment="Обработка нулевого количества при создании товара">
+    <list default="true" id="f50b7e2a-a8ca-4368-adc0-646e3405cd82" name="Changes" comment="Добавлены обработка исключений и метод подсчета среднего ценника&#10;&#10;- В классе `Product` реализована проверка нулевого количества при создании:&#10;  - Если количество товара равно 0, выбрасывается исключение `ValueError` с сообщением: «Товар с нулевым количеством не может быть добавлен».&#10;&#10;- В классе `Category` добавлен метод `calculate_average_price`:&#10;  - Подсчитывает среднюю цену товаров в категории.&#10;  - Возвращает 0, если в категории нет товаров (обработан случай деления на ноль).&#10;&#10;- Реализован пользовательский класс исключений `ZeroQuantityError`:&#10;  - Используется для обработки событий добавления товаров с нулевым количеством в категорию.&#10;&#10;- Доработан метод `add_product` в классе `Category`:&#10;  - Обрабатывает исключение `ZeroQuantityError`.&#10;  - Выводит сообщение об успешной или неуспешной попытке добавления товара.&#10;  - Гарантирует завершение обработки добавления с помощью блока `finally`.&#10;&#10;- Написаны тесты:&#10;  - Проверка выброса исключения при создании товара с нулевым количеством.&#10;  - Тестирование метода подсчета среднего ценника в категории.&#10;  - Проверка работы пользовательского исключения `ZeroQuantityError`.&#10;&#10;- Обновлено README:&#10;  - Добавлено описание нового функционала.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/category.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/category.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_category.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_category.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/product.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Feature3" />
+        <entry key="$PROJECT_DIR$" value="Feature4" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -61,7 +61,7 @@
     "Python.test_main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Feature4"
+    "git-widget-placeholder": "Feature5"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -70,7 +70,7 @@
       <recent name="C:\Users\aboga\PycharmProjects\SmartionShop\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for test_product.test_product_total_value">
+  <component name="RunManager" selected="Python.category">
     <configuration name="category" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="SmartionShop" />
       <option name="ENV_FILES" value="" />
@@ -210,7 +210,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738067207445</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Добавлены обработка исключений и метод подсчета среднего ценника&#10;&#10;- В классе `Product` реализована проверка нулевого количества при создании:&#10;  - Если количество товара равно 0, выбрасывается исключение `ValueError` с сообщением: «Товар с нулевым количеством не может быть добавлен».&#10;&#10;- В классе `Category` добавлен метод `calculate_average_price`:&#10;  - Подсчитывает среднюю цену товаров в категории.&#10;  - Возвращает 0, если в категории нет товаров (обработан случай деления на ноль).&#10;&#10;- Реализован пользовательский класс исключений `ZeroQuantityError`:&#10;  - Используется для обработки событий добавления товаров с нулевым количеством в категорию.&#10;&#10;- Доработан метод `add_product` в классе `Category`:&#10;  - Обрабатывает исключение `ZeroQuantityError`.&#10;  - Выводит сообщение об успешной или неуспешной попытке добавления товара.&#10;  - Гарантирует завершение обработки добавления с помощью блока `finally`.&#10;&#10;- Написаны тесты:&#10;  - Проверка выброса исключения при создании товара с нулевым количеством.&#10;  - Тестирование метода подсчета среднего ценника в категории.&#10;  - Проверка работы пользовательского исключения `ZeroQuantityError`.&#10;&#10;- Обновлено README:&#10;  - Добавлено описание нового функционала.">
+      <option name="closed" value="true" />
+      <created>1738068014749</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1738068014749</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -234,6 +242,7 @@
     <MESSAGE value="Исправлена проверка типов при сложении объектов&#10;&#10;- В методе `__add__` заменён `isinstance` на `type` для проверки, что сложение возможно только между объектами одного и того же класса.&#10;- Обновлены тесты для проверки корректной работы ограничений сложения." />
     <MESSAGE value="Реализованы абстрактный класс, миксин и функционал заказов&#10;&#10;- Добавлен абстрактный класс `BaseProduct`:&#10;  - Выделена общая функциональность для продуктов.&#10;  - Классы `Product`, `Smartphone` и `LawnGrass` наследуются от `BaseProduct`.&#10;&#10;- Реализован миксин `CreationLoggerMixin`:&#10;  - Логирует информацию о создании объектов продуктов.&#10;&#10;- Доработаны классы `Product`, `Smartphone`, `LawnGrass`:&#10;  - Включены функционал миксина и методы абстрактного класса.&#10;&#10;- Добавлен класс `Order`:&#10;  - Описывает заказы на товары.&#10;  - Вычисляет итоговую стоимость заказа.&#10;&#10;- Написаны тесты:&#10;  - Для абстрактного класса, миксина и класса `Order`.&#10;  - Проверена совместимость с существующими тестами.&#10;&#10;- Обновлено README:&#10;  - Добавлено описание нового функционала." />
     <MESSAGE value="Обработка нулевого количества при создании товара" />
-    <option name="LAST_COMMIT_MESSAGE" value="Обработка нулевого количества при создании товара" />
+    <MESSAGE value="Добавлены обработка исключений и метод подсчета среднего ценника&#10;&#10;- В классе `Product` реализована проверка нулевого количества при создании:&#10;  - Если количество товара равно 0, выбрасывается исключение `ValueError` с сообщением: «Товар с нулевым количеством не может быть добавлен».&#10;&#10;- В классе `Category` добавлен метод `calculate_average_price`:&#10;  - Подсчитывает среднюю цену товаров в категории.&#10;  - Возвращает 0, если в категории нет товаров (обработан случай деления на ноль).&#10;&#10;- Реализован пользовательский класс исключений `ZeroQuantityError`:&#10;  - Используется для обработки событий добавления товаров с нулевым количеством в категорию.&#10;&#10;- Доработан метод `add_product` в классе `Category`:&#10;  - Обрабатывает исключение `ZeroQuantityError`.&#10;  - Выводит сообщение об успешной или неуспешной попытке добавления товара.&#10;  - Гарантирует завершение обработки добавления с помощью блока `finally`.&#10;&#10;- Написаны тесты:&#10;  - Проверка выброса исключения при создании товара с нулевым количеством.&#10;  - Тестирование метода подсчета среднего ценника в категории.&#10;  - Проверка работы пользовательского исключения `ZeroQuantityError`.&#10;&#10;- Обновлено README:&#10;  - Добавлено описание нового функционала." />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлены обработка исключений и метод подсчета среднего ценника&#10;&#10;- В классе `Product` реализована проверка нулевого количества при создании:&#10;  - Если количество товара равно 0, выбрасывается исключение `ValueError` с сообщением: «Товар с нулевым количеством не может быть добавлен».&#10;&#10;- В классе `Category` добавлен метод `calculate_average_price`:&#10;  - Подсчитывает среднюю цену товаров в категории.&#10;  - Возвращает 0, если в категории нет товаров (обработан случай деления на ноль).&#10;&#10;- Реализован пользовательский класс исключений `ZeroQuantityError`:&#10;  - Используется для обработки событий добавления товаров с нулевым количеством в категорию.&#10;&#10;- Доработан метод `add_product` в классе `Category`:&#10;  - Обрабатывает исключение `ZeroQuantityError`.&#10;  - Выводит сообщение об успешной или неуспешной попытке добавления товара.&#10;  - Гарантирует завершение обработки добавления с помощью блока `finally`.&#10;&#10;- Написаны тесты:&#10;  - Проверка выброса исключения при создании товара с нулевым количеством.&#10;  - Тестирование метода подсчета среднего ценника в категории.&#10;  - Проверка работы пользовательского исключения `ZeroQuantityError`.&#10;&#10;- Обновлено README:&#10;  - Добавлено описание нового функционала." />
   </component>
 </project>

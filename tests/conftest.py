@@ -40,7 +40,9 @@ def temp_json_file(tmp_path):
     with open(file_path, "w", encoding="utf-8") as file:
         json.dump(data, file)
 
+    print(json.dumps(data, indent=4, ensure_ascii=False))
     return file_path
+
 
 
 

@@ -24,12 +24,8 @@ class Product(CreationLoggerMixin, BaseProduct):
             raise ValueError("Товар с нулевым количеством не может быть добавлен")
         super().__init__(name, description, price, quantity)
 
-
     def __str__(self):
-        """
-        Строковое представление продукта.
-        """
-        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
+        return super().__str__()
 
     @property
     def price(self):
@@ -94,7 +90,7 @@ class Product(CreationLoggerMixin, BaseProduct):
         assert product.price == 50.0  # Цена не изменилась
 
     def __add__(self, other):
-        if type(self) != type(other):  # Проверяем именно тип объекта, а не его наследников
+        if not isinstance(other, self.__class__):  # Проверяем, чтобы оба объекта были одного класса
             raise TypeError("Сложение возможно только между объектами одного и того же типа.")
         return self.price * self.quantity + other.price * other.quantity
 
